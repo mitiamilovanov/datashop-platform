@@ -1,0 +1,29 @@
+# Data — regenerable via lab-01/generate_datashop_data.py and downstream scripts
+data/
+lab-02/data/
+lab-09/output/
+lab-10/transactions_with_errors.csv
+lab-12/*.txt
+
+# Databases
+*.duckdb
+*.duckdb.wal
+
+# Big binaries
+*.jar
+
+# dbt artifacts
+**/target/
+**/dbt_packages/
+**/logs/
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store

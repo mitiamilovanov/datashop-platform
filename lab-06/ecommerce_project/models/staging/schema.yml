@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: stg_transactions
+    description: "Completed DataShop transactions, cleaned and typed."
+    columns:
+      - name: transaction_id
+        description: "Unique transaction identifier (UUID)."
+        tests:
+          - unique
+          - not_null
+      - name: amount
+        description: "Transaction amount."
+        tests:
+          - not_null
+      - name: country
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['USA', 'UK', 'Germany', 'Canada', 'France']
+      - name: category
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Books', 'Clothing', 'Electronics', 'Home & Garden', 'Sports']
+
+  - name: stg_customers
+    description: "DataShop customer master data."
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
