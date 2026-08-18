@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  dbt-build:
+    name: Generate data → load DuckDB → dbt build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Lab scripts resolve paths from $HOME/datashop-platform
+      - name: Link workspace to expected path
+        run: ln -s "$GITHUB_WORKSPACE" "$HOME/datashop-platform"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install faker duckdb dbt-duckdb
+
+      - name: Generate DataShop dataset (100K transactions)
+        run: |
+          mkdir -p "$HOME/datashop-platform/data/raw"
+          python lab-01/generate_datashop_data.py
+
+      - name: Load raw CSVs into DuckDB
+        run: python lab-06/load_to_duckdb.py
+
+      - name: Write dbt profile
+        run: |
+          mkdir -p ~/.dbt
+          cat > ~/.dbt/profiles.yml <<EOF
+          ecommerce_project:
+            target: dev
+            outputs:
+              dev:
+                type: duckdb
+                path: $HOME/datashop-platform/lab-06/datashop.duckdb
+          EOF
+
+      - name: dbt build (models + tests)
+        working-directory: lab-06/ecommerce_project
+        run: dbt build

@@ -1,8 +1,10 @@
 """Lab 06 — Load DataShop raw CSVs into DuckDB warehouse."""
 import duckdb
+from pathlib import Path
 
-DB_PATH = "/home/giga/datashop-platform/lab-06/datashop.duckdb"
-RAW = "/home/giga/datashop-platform/data/raw"
+ROOT = Path.home() / "datashop-platform"
+DB_PATH = str(ROOT / "lab-06" / "datashop.duckdb")
+RAW = str(ROOT / "data" / "raw")
 
 TABLES = {
     "raw_transactions": f"{RAW}/datashop_transactions.csv",

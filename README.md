@@ -1,5 +1,7 @@
 # DataShop Data Platform
 
+[![CI](https://github.com/mitiamilovanov/datashop-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/mitiamilovanov/datashop-platform/actions/workflows/ci.yml)
+
 An end-to-end, 7-layer data engineering platform built from scratch for **DataShop**, a fictional e-commerce company — covering the full lifecycle of data: batch processing, a lakehouse, SQL transformations, real-time streaming, orchestration, data quality gates, self-service analytics, and an AI-powered semantic search layer.
 
 Built as a hands-on 12-lab project. Everything runs locally (WSL2 Ubuntu) on a 100K-transaction synthetic dataset, using the same open-source stack and architecture patterns that power production platforms at scale.
