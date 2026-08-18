@@ -53,6 +53,14 @@ flowchart LR
 - **Self-service analytics**: a Superset dashboard on a pre-aggregated DuckDB mart (revenue verified to the cent against raw data)
 - **Grounded AI search**: a RAG pipeline (SentenceTransformers + ChromaDB) that answers policy questions with citations and safely refuses out-of-scope questions
 
+## The dashboard
+
+The serving layer: an Apache Superset dashboard reading a pre-aggregated DuckDB mart (`agg_daily_revenue`, 9,124 rows at day × category × country grain), built by dbt and gated by Great Expectations upstream.
+
+![DataShop Analytics dashboard in Apache Superset](docs/superset-dashboard.png)
+
+Revenue splits are near-uniform across countries (France 9.36M → Germany 8.97M, a ~4% spread), while Electronics dominates by category — figures verified to the cent against the raw Parquet source.
+
 ## The 12 Labs
 
 | # | Lab | Stack | What was built |
