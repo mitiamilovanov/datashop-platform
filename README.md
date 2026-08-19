@@ -125,15 +125,6 @@ python lab-02/convert_datashop.py
 # 3. Run any lab — each is independent, see the table above.
 #    Kafka labs need Docker: docker compose -f lab-07/docker-compose.yml up -d
 ```
-
-## Lessons learned (the hard way)
-
-- Default Flink parallelism > partition count silently holds watermarks at −∞ — the job looks healthy, but windows never fire. Set `parallelism.default = 1` for a 3-partition topic.
-- A green Airflow run is not proof of work: a mis-indented DAG parsed with **zero tasks** and every run showed green. Always verify the task graph.
-- Great Expectations 1.2: `value_set` must be a `list` — a Python `set` serializes non-deterministically and breaks resource freshness checks.
-- Unsorted event streams make event-time windowing meaningless — sort (or design for out-of-order data with watermarks) before replaying.
-- Superset's DuckDB URI needs four slashes for an absolute path: `duckdb:////path/to/db.duckdb`.
-
 ---
 
 **Author:** Mitia Milovanov · built with [Claude Code](https://claude.com/claude-code) as a pair-programming tutor
